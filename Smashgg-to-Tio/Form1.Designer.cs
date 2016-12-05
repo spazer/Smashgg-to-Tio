@@ -33,10 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonConvert = new System.Windows.Forms.Button();
-            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.textBoxTourneyName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBoxBracketName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +78,7 @@
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(16, 165);
+            this.buttonConvert.Location = new System.Drawing.Point(16, 197);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(75, 23);
             this.buttonConvert.TabIndex = 2;
@@ -84,21 +86,21 @@
             this.buttonConvert.UseVisualStyleBackColor = true;
             this.buttonConvert.Click += new System.EventHandler(this.buttonConvert_Click);
             // 
-            // textBoxName
+            // textBoxTourneyName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(16, 109);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(307, 20);
-            this.textBoxName.TabIndex = 1;
+            this.textBoxTourneyName.Location = new System.Drawing.Point(16, 109);
+            this.textBoxTourneyName.Name = "textBoxTourneyName";
+            this.textBoxTourneyName.Size = new System.Drawing.Size(307, 20);
+            this.textBoxTourneyName.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(13, 93);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 13);
+            this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Tournament/Bracket Name:";
+            this.label4.Text = "Tournament Name:";
             // 
             // dateTimePicker1
             // 
@@ -117,16 +119,34 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Tournament Date:";
             // 
+            // textBoxBracketName
+            // 
+            this.textBoxBracketName.Location = new System.Drawing.Point(16, 160);
+            this.textBoxBracketName.Name = "textBoxBracketName";
+            this.textBoxBracketName.Size = new System.Drawing.Size(307, 20);
+            this.textBoxBracketName.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 144);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Bracket Name:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 214);
+            this.ClientSize = new System.Drawing.Size(612, 241);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.buttonConvert);
-            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.textBoxBracketName);
+            this.Controls.Add(this.textBoxTourneyName);
             this.Controls.Add(this.textBoxURL);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -145,10 +165,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonConvert;
-        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBoxTourneyName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxBracketName;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -42,9 +42,15 @@ namespace Smashgg_to_Tio
                 return;
             }
 
-            if (textBoxName.Text.Trim() == string.Empty)
+            if (textBoxTourneyName.Text.Trim() == string.Empty)
             {
-                MessageBox.Show("You need to specify a name");
+                MessageBox.Show("You need to specify a tournament name");
+                return;
+            }
+
+            if (textBoxBracketName.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("You need to specify a bracket name");
                 return;
             }
 
@@ -113,14 +119,14 @@ namespace Smashgg_to_Tio
 
             // Create event
             XmlNode Event = EventList.AppendChild(doc.CreateElement("Event"));
-            Event.AppendChild(doc.CreateElement("Name")).InnerText = textBoxName.Text;
+            Event.AppendChild(doc.CreateElement("Name")).InnerText = textBoxTourneyName.Text;
             Event.AppendChild(doc.CreateElement("StartDate")).InnerText = dateTimePicker1.Text;
 
 
-            // Create an arbitrary game for the event
+            // Create a game for the event
             XmlNode Games = Event.AppendChild(doc.CreateElement("Games"));
             XmlNode Game = Games.AppendChild(doc.CreateElement("Game"));
-            Game.AppendChild(doc.CreateElement("Name")).InnerText = "Exported smash.gg bracket";
+            Game.AppendChild(doc.CreateElement("Name")).InnerText = textBoxBracketName.Text;
             Game.AppendChild(doc.CreateElement("GameType")).InnerText = "Singles";
 
             // Add entrant list of player IDs to the Game node
@@ -189,9 +195,9 @@ namespace Smashgg_to_Tio
 
             // Output file
             System.IO.Directory.CreateDirectory("Output Files");
-            doc.Save("Output Files/" + MakeValidFileName(textBoxName.Text) + ".tio");
+            doc.Save("Output Files/" + MakeValidFileName(textBoxTourneyName.Text) + ".tio");
 
-            MessageBox.Show("File ouptut to Output Files/" + MakeValidFileName(textBoxName.Text) + ".tio");
+            MessageBox.Show("File ouptut to Output Files/" + MakeValidFileName(textBoxTourneyName.Text) + ".tio");
         }
 
         /// <summary>
