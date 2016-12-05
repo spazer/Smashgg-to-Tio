@@ -195,9 +195,9 @@ namespace Smashgg_to_Tio
 
             // Output file
             System.IO.Directory.CreateDirectory("Output Files");
-            doc.Save("Output Files/" + MakeValidFileName(textBoxTourneyName.Text) + ".tio");
+            doc.Save("Output Files/" + MakeValidFileName(textBoxTourneyName.Text + " - " + textBoxBracketName.Text) + ".tio");
 
-            MessageBox.Show("File ouptut to Output Files/" + MakeValidFileName(textBoxTourneyName.Text) + ".tio");
+            MessageBox.Show("File ouptut to Output Files/" + MakeValidFileName(textBoxTourneyName.Text + " - " + textBoxBracketName.Text) + ".tio");
         }
 
         /// <summary>
