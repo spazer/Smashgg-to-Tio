@@ -29,6 +29,7 @@ namespace Smashgg_to_Tio
         {
             InitializeComponent();
 
+            // Set format for the DateTimePicker
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
         }
@@ -41,14 +42,12 @@ namespace Smashgg_to_Tio
                 MessageBox.Show("You need to specify a URL");
                 return;
             }
-
-            if (textBoxTourneyName.Text.Trim() == string.Empty)
+            else if (textBoxTourneyName.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("You need to specify a tournament name");
                 return;
             }
-
-            if (textBoxBracketName.Text.Trim() == string.Empty)
+            else if (textBoxBracketName.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("You need to specify a bracket name");
                 return;
@@ -92,9 +91,11 @@ namespace Smashgg_to_Tio
             // Deserialize json
             JObject bracketJson = JsonConvert.DeserializeObject<JObject>(json);
 
+            // Parse entrants and sets from the json
             api.GetEntrants(bracketJson.SelectToken(SmashggStrings.Entities + "." + SmashggStrings.Entrants), ref entrantList);
             api.GetSets(bracketJson.SelectToken(SmashggStrings.Entities + "." + SmashggStrings.Sets), ref setList);
-
+            
+            // Create the XML
             CreateXML();
 
             // Clear global vars to avoid problems from residual data
@@ -105,14 +106,8 @@ namespace Smashgg_to_Tio
 
         private void CreateXML()
         {
-            // Test
-            //Player newPlayer = new Player("Joe", "");
-            //Entrant newEntrant = new Entrant(newPlayer);
-            //entrantList.Add(1, newEntrant);
-            //textBoxName.Text = "TESTING event";
-
+            // Create new XML document
             XmlDocument doc = new XmlDocument();
-
             XmlElement AppData = (XmlElement)doc.AppendChild(doc.CreateElement("AppData"));
             XmlNode EventList = AppData.AppendChild(doc.CreateElement("EventList"));
             XmlNode PlayerList = AppData.AppendChild(doc.CreateElement("PlayerList"));
@@ -121,7 +116,6 @@ namespace Smashgg_to_Tio
             XmlNode Event = EventList.AppendChild(doc.CreateElement("Event"));
             Event.AppendChild(doc.CreateElement("Name")).InnerText = textBoxTourneyName.Text;
             Event.AppendChild(doc.CreateElement("StartDate")).InnerText = dateTimePicker1.Text;
-
 
             // Create a game for the event
             XmlNode Games = Event.AppendChild(doc.CreateElement("Games"));
@@ -139,7 +133,7 @@ namespace Smashgg_to_Tio
                 Entrants.AppendChild(doc.CreateElement("PlayerID")).InnerText = entry.Key.ToString();
             }
 
-            // Create the bracket and matches
+            // Create the bracket and add all matches
             XmlNode Bracket = Game.AppendChild(doc.CreateElement("Bracket"));
             XmlNode Matches = Bracket.AppendChild(doc.CreateElement("Matches"));
             foreach (Set nextSet in setList)
@@ -273,6 +267,12 @@ namespace Smashgg_to_Tio
             return UrlNumberType.None;
         }
 
+        /// <summary>
+        /// Gets the requested phase group using the smash.gg api. 
+        /// </summary>
+        /// <param name="phaseGroup">phase group number</param>
+        /// <param name="json">json file with bracket info</param>
+        /// <returns>True on success, false otherwise</returns>
         private bool retrievePhaseGroup(int phaseGroup, out string json)
         {
 
@@ -295,6 +295,11 @@ namespace Smashgg_to_Tio
             }
         }
 
+        /// <summary>
+        /// Replaces invalid filename characters with underscores
+        /// </summary>
+        /// <param name="name">input filename</param>
+        /// <returns>output filename</returns>
         private static string MakeValidFileName(string name)
         {
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
@@ -303,6 +308,9 @@ namespace Smashgg_to_Tio
             return System.Text.RegularExpressions.Regex.Replace(name, invalidRegStr, "_");
         }
 
+        /// <summary>
+        /// Gets tournament info from the base page. Mostly irrlevant for this program except for getting the phase/phase group list.
+        /// </summary>
         private void UpdateTournamentStructure()
         {
             try
